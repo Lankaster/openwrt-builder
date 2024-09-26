@@ -59,13 +59,12 @@ jobs:
 
       - name: Configure firmware image
         run: |
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/configs/mediatek/mt7988a/bpi-r4 > .config
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/configs/common/luci >> .config
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/configs/common/snapshot-short >> .config
+          curl -SL https://raw.githubusercontent.com/Lankaster/openwrt-builder/master/configs/mediatek/mt7988a/bpi-r4 > .config
+          curl -SL https://raw.githubusercontent.com/Lankaster/openwrt-builder/master/configs/common/luci >> .config
+          curl -SL https://raw.githubusercontent.com/Lankaster/openwrt-builder/master/configs/common/snapshot-short >> .config
           sed -i '/CONFIG_PACKAGE_wpad-mbedtls=y/d' .config
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/configs/common/openssl >> .config
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/configs/common/lte-5g-modem >> .config
-          curl -SL https://raw.githubusercontent.com/danpawlik/openwrt-builder/master/configs/common/community >> .config
+          curl -SL https://raw.githubusercontent.com/Lankaster/openwrt-builder/master/configs/common/openssl >> .config
+          curl -SL https://raw.githubusercontent.com/Lankaster/openwrt-builder/master/configs/common/community >> .config
 
       - name: Run defconfig
         run: |
@@ -118,7 +117,7 @@ jobs:
           tag_name: ${{ env.RELEASE_PREFIX }}-${{ env.REMOTE_BRANCH }}-${{ env.RELEASE_DATE }}
           name: OpenWRT BPI-R4 + BE14 + luci BE - ${{ env.REMOTE_BRANCH }} - ${{ env.RELEASE_DATE }}
           body: |
-            Updated prebuilt images for ${{ env.RELEASE_DATE }} with BE14, luci BE, basic 5G modem packages, that was
+            Updated prebuilt images for ${{ env.RELEASE_DATE }} with BE14, luci BE, that was
             expected by the community members.
             Build Commit: ${{ needs.check_commits.outputs.latest_commit_sha }}
 
